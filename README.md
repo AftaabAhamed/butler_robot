@@ -63,3 +63,7 @@ Simple delivery video
 [![Demo](https://img.youtube.com/vi/WktzcJttmdk/0.jpg)](https://youtu.be/WktzcJttmdk)
 
 Delivery cancel video 
+
+## FLOW SHEET
+![flowsheet](src/butler_bot/butler_flow.webp)
+
