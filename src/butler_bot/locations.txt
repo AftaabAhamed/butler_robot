@@ -1,0 +1,53 @@
+
+t3 
+- Translation: [-3.998, 1.434, -0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.125, 0.992]
+- Rotation: in RPY (radian) [0.000, 0.000, -0.250]
+- Rotation: in RPY (degree) [0.000, 0.000, -14.308]
+
+- Translation: [3.343, -0.649, 0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.643, 0.766]
+
+
+t2
+- Translation: [4.030, 3.608, -0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.618, 0.786]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.332]
+- Rotation: in RPY (degree) [0.000, 0.000, -76.343]
+
+- Translation: [2.822, -4.569, 0.150]
+- Rotation: in Quaternion [0.000, 0.000, 0.628, 0.778]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.358]
+- Rotation: in RPY (degree) [0.000, -0.000, 77.809]
+
+
+t1
+- Translation: [4.669, -1.366, -0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.818, 0.576]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.914]
+- Rotation: in RPY (degree) [0.000, 0.000, -109.675]
+
+- Translation: [0.755, -4.589, 0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.159, 0.987]
+- Rotation: in RPY (radian) [0.000, 0.000, -0.319]
+- Rotation: in RPY (degree) [0.000, 0.000, -18.254]
+
+
+kitchen
+- Translation: [0.015, -2.000, 0.150]
+- Rotation: in Quaternion [0.000, 0.000, -0.711, 0.703]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.583]
+- Rotation: in RPY (degree) [0.000, 0.000, -90.678]
+
+
+
+order = [t1 t2 t3]
+
+ros2 action send_goal /take_order butler_interfaces/action/TableOrder '"order":"["table1","table2","table3"]"' --feedback
+
+
+
+ros2 action send_goal /take_order butler_interfaces/action/TableOrder '{order: ["table1", "table2", "table3"]}' --feedback
+
+
+ros2 service call /cancel_order butler_interfaces/srv/CancelOrder '{tableid:"table3"}'
