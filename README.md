@@ -1,4 +1,3 @@
-
 # Butler Robot 
 
 ## Requirements
@@ -51,6 +50,41 @@ To cancel orders call service with table name
 ```
 ros2 service call /cancel_order butler_interfaces/srv/CancelOrder '{tableid: "table3"}'
 ```
+
+## Code Breakdown
+
+### `conf_server.py`
+This file defines a ROS 2 service server that handles two services: `kitchen_conf` and `table_conf`. It allows the user to emulate confirmations for kitchen orders and table statuses via terminal input.
+
+- **Key Components**:
+  - **`ConfServer` Class**:
+    - `handle_kitchen_request`: Processes kitchen order requests and prompts the user to enter ready orders.
+    - `handle_table_request`: Processes table requests and prompts the user to confirm the table status.
+    - `input_with_timeout`: Waits for user input with a timeout to ensure responsiveness.
+  - **Usage**:
+    - Run the service node:  
+      ```bash
+      ros2 run butler_bot conf_server
+      ```
+
+### `robot_manager.py`
+This file defines a ROS 2 action server that manages robot navigation and order delivery. It interacts with the `conf_server` via services and handles order cancellations.
+
+- **Key Components**:
+  - **`ButlerActionServer` Class**:
+    - `execute_callback`: Main logic for handling orders, including navigation to the kitchen, delivering orders to tables, and handling cancellations.
+    - `go_to_destination`: Commands the robot to navigate to a specific location.
+    - `get_kitchen_conf` and `get_table_conf`: Interact with the `conf_server` to confirm kitchen readiness and table delivery.
+    - `cancel_order_callback`: Handles order cancellation requests.
+  - **Usage**:
+    - Send an order to the robot manager node:  
+      ```bash
+      ros2 action send_goal /take_order butler_interfaces/action/TableOrder '{order: ["table1", "table2", "table3"]}' --feedback
+      ```
+    - Cancel an order:  
+      ```bash
+      ros2 service call /cancel_order butler_interfaces/srv/CancelOrder '{tableid: "table3"}'
+      ```
 
 ## Demo Video
 
