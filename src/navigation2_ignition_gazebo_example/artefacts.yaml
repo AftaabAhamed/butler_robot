@@ -1,0 +1,25 @@
+version: 0.1.0
+
+project: artefacts/navigation2-ignition-example
+
+jobs:
+
+  all: # Overall job name
+    type: test
+    package:
+      docker:
+        build:
+          dockerfile: ./Dockerfile
+    runtime:
+      simulator: gazebo:fortress
+      framework: ros2:humble
+    timeout: 5 #minutes
+    scenarios:
+      defaults: {} # Global to all scenarios, and overriden in specific scenarios.
+      settings:
+        - name: bringup
+          ros_testfile: "src/sam_bot_nav2_gz/test/test_bringup.launch.py"
+        - name: reach_goal
+          ros_testfile: "src/sam_bot_nav2_gz/test/test_reach_goal.launch.py"
+        - name: follow_waypoints
+          ros_testfile: "src/sam_bot_nav2_gz/test/test_follow_waypoints.launch.py"
