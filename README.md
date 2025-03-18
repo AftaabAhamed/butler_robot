@@ -8,7 +8,7 @@
 ## Requirements for setting up gazebo robot simulation package
 link to original package : [Github Repo](https://github.com/art-e-fact/navigation2_ignition_gazebo_example)
 
-### inside navigation2_ignition_gazebo_example
+inside navigation2_ignition_gazebo_example
 
 setup and build
 ```
